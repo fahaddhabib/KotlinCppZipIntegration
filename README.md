@@ -1,27 +1,33 @@
-Test Task:
-
+Test Task: Kotlin-C++ ZIP Integration
 <div style="display: flex; justify-content: center;">
     <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/1.jpg" alt="1" width="200">
     <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/2.jpg" alt="2" width="200">
 </div>
+Overview
 
-You write a Kotlin program that downloads a ZIP file from a web server, unpacks this ZIP file and docks the library contained in it (programmed by you in C++) to your Kotlin program.
+This project demonstrates a Kotlin program that downloads a ZIP file from a web server, unpacks the ZIP file, and integrates the contained library (programmed in C++) with the Kotlin program. The library contains a function that displays text passed by the Kotlin program on the screen, queries the OK button, and when the OK button is pressed, sends a message back to the Kotlin program.
 
-The library contains a function that displays the text passed by the Kotlin program on the screen, queries the OK button and when the OK button is pressed, the library sends a message back to the Kotlin program
 Status: Done
+C++ Library in ZIP
+Implementation Details
+Steps Taken:
 
-[C++ library in zip](https://drive.google.com/file/d/1EMxJYf8uutC-EO1Xm97AwLaTSSBzGzQA/view?usp=drive_link)
+    Created and Compiled C++ Library:
+        Used Android Studio and NDK to create and compile the C++ library.
 
-What I did?
+    Prepared the ZIP File:
+        Zipped all architecture-specific (armeabi-v7a, arm64-v8a, etc.) lib.so files and stored the ZIP on Google Drive.
 
-1: I created/compiled a cpp library in android studio using NDK
-2: zip all the Architectures (armeabi-v7a, arm64-v8a, etc) lib.so and store on google drive
+    Wrote the Kotlin Code:
+        Developed a Kotlin program that:
+            Downloads the ZIP file from the web server.
+            Unpacks the ZIP file.
+            Integrates the library contained in it.
+            Operates on-the-fly, without interruption and manual intervention.
 
-3: Wrote a code as per instructions.
-a) Kotlin program that downloads a ZIP file from a web server, unpacks this ZIP file and docks the library contained in it (All on the fly, without interruption and without manual intervention.)
+Functionality:
 
-What is happening?
-Library contains a function  getMessage() which statically set to "Message from C++" to message from library and a passMessage to pass userInput to Library
- 
+The library includes:
 
-
+    getMessage(): Returns the message "Message from C++".
+    passMessage(userInput: String): Receives user input from the Kotlin program and handles it within the library.

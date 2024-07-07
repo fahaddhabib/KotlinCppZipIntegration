@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- Configure trusted certificates here (if needed) -->
+            <domain includeSubdomains="true">drive.google.com</domain>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

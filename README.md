@@ -1,5 +1,10 @@
-
 Test Task:
+
+<div style="display: flex; justify-content: center;">
+    <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/1.jpg" alt="1" width="200">
+    <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/2.jpg" alt="2" width="200">
+</div>
+
 You write a Kotlin program that downloads a ZIP file from a web server, unpacks this ZIP file and docks the library contained in it (programmed by you in C++) to your Kotlin program.
 
 The library contains a function that displays the text passed by the Kotlin program on the screen, queries the OK button and when the OK button is pressed, the library sends a message back to the Kotlin program

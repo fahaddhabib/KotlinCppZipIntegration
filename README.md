@@ -1,9 +1,11 @@
 # Kotlin-C++ ZIP Integration
+
 <div style="display: flex; justify-content: center;">
     <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/1.jpg" alt="1" width="200">
     <img src="https://github.com/fahaddhabib/KotlinCppZipIntegration/blob/mainbranch/assets/2.jpg" alt="2" width="200">
 </div>
-Overview
+
+# Overview
 
 This project demonstrates a Kotlin program that downloads a ZIP file from a web server, unpacks the ZIP file, and integrates the contained library (programmed in C++) with the Kotlin program. The library contains a function that displays text passed by the Kotlin program on the screen, queries the OK button, and when the OK button is pressed, sends a message back to the Kotlin program.
 

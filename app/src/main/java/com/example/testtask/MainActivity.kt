@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,21 +26,27 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var displayTextView: TextView
     private lateinit var editTextView: EditText
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         // Initialize UI components
         displayTextView = findViewById(R.id.displayTextView)
         editTextView = findViewById(R.id.editTextView)
+        progressBar = findViewById(R.id.progressBar)
         val okButton: Button = findViewById(R.id.okButton)
 
         // Execute the download and unpack operation in a background thread
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = "https://drive.google.com/uc?id=1EMxJYf8uutC-EO1Xm97AwLaTSSBzGzQA&export=download"
+                withContext(Dispatchers.Main) {
+                    progressBar.visibility = android.view.View.VISIBLE
+                    displayTextView.text = "Downloading Library"
+                }
+
+                val url = "https://drive.google.com/uc?id=1stozrerOQI2Ik69VyemivXtIFqDJaCpJ&export=download"
                 val zipFile = File(filesDir, "testTaskLib.zip")
                 val outputDir = File(filesDir, "unzipped")
 
@@ -55,11 +62,13 @@ class MainActivity : AppCompatActivity() {
                     "x86_64" -> File(outputDir, "x86_64/libMyLibrary.so")
                     else -> throw UnsupportedOperationException("Unsupported architecture: $architecture")
                 }
-                    System.load(libraryFile.absolutePath)
+                System.load(libraryFile.absolutePath)
 
                 withContext(Dispatchers.Main) {
+                    progressBar.visibility = android.view.View.GONE
+                    displayTextView.text = "Library Downloaded"
                     // Display text using the native library (if needed)
-                    MyLibrary.passMessage("Hello from Kotlin!")
+                   // MyLibrary.passMessage("Library downloaded")
                 }
 
                 // Set up the OK button click listener after loading the library
@@ -70,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
+                    progressBar.visibility = android.view.View.GONE
                     displayTextView.text = "Error: ${e.message}"
                     Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -81,9 +91,9 @@ class MainActivity : AppCompatActivity() {
         // Handle OK button click actions here
         CoroutineScope(Dispatchers.Main).launch {
             MyLibrary.passMessage(editTextView.text.toString())
-                displayTextView.text =  MyLibrary.getMessage()
-                Toast.makeText(this@MainActivity, "OK button pressed.", Toast.LENGTH_SHORT).show()
-
+            editTextView.text.clear()
+            displayTextView.text = MyLibrary.getMessage()
+            Toast.makeText(this@MainActivity, "Library response: " + MyLibrary.getMessage(), Toast.LENGTH_SHORT).show()
         }
     }
 
